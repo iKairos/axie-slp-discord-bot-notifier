@@ -57,7 +57,6 @@ class SLP(commands.Cog):
         file = discord.File("assets/images/graphs/minutely.png", filename="mnt.png")
 
         embed = discord.Embed(
-            title="SLP Minutely Behavior",
             description="Graph of the minutely behavior of SLP today.",
             color=0x1ABC9C,
             timestamp=datetime.utcnow()
@@ -65,6 +64,10 @@ class SLP(commands.Cog):
         embed.set_image(url="attachment://mnt.png")
         embed.set_footer(
             text="Graph as of"
+        )
+        embed.set_author(
+            name="SLP Minutely Behavior",
+            icon_url="https://cdn.discordapp.com/attachments/545533157131288587/876658614553686016/slp.png"
         )
 
         await ctx.send(file=file, embed=embed)

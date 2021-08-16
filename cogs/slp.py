@@ -69,5 +69,42 @@ class SLP(commands.Cog):
 
         await ctx.send(file=file, embed=embed)
 
+    @commands.command(aliases=['conv'],
+        name="convert",
+        description="Converts the number of slp to its final price based on the given currency.",
+        usage="slp convert <currency> <total_slp>")
+    async def convert(self, ctx, currency, total_slp):
+        await ctx.message.channel.trigger_typing()
+
+        cg = CoinGeckoAPI()
+        price = float(get_slpprice(currency)['smooth-love-potion'][currency]) 
+
+        symbol = cg.get_exchange_rates()['rates'][currency]['unit']
+
+        total = price * float(total_slp)
+
+        embed = discord.Embed(
+            description=f"The converted value of {total_slp} SLP to {currency.upper()}.",
+            color=0x1ABC9C,
+            timestamp=datetime.utcnow()
+        )
+        embed.set_author(
+            name="Total SLP Converter",
+            icon_url="https://cdn.discordapp.com/attachments/545533157131288587/876658614553686016/slp.png"
+        )
+        embed.add_field(
+            name=f"Current SLP to {currency.upper()} rate",
+            value=f"{symbol}{price}"
+        )
+        embed.add_field(
+            name=f"Total SLP converted to {currency.upper()}",
+            value=f"{symbol}{total}"
+        )
+        embed.set_footer(
+            text="As of"
+        )
+
+        await ctx.send(embed=embed)
+
 def setup(bot):
     bot.add_cog(SLP(bot))

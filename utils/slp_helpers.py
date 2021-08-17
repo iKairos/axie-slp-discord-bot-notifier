@@ -6,6 +6,11 @@ def get_slpprice(currency): # function to retrieve specifically SLP price rate
     price = cg.get_price(ids='smooth-love-potion', vs_currencies=currency)
     return price
 
+def get_axsprice(currency): # function to retrieve specifically AXS price rate
+    cg = CoinGeckoAPI()
+    price = cg.get_price(ids='axie-infinity', vs_currencies=currency)
+    return price
+
 def get_minutely_market_history(currency):
     cg = CoinGeckoAPI()
 

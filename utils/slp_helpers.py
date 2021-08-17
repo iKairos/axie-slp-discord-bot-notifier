@@ -24,7 +24,10 @@ def graph_day_market_history(currency): # graphs minutely data of slp
     temp = get_minutely_market_history(currency)
     
     x = list(range(len(temp)))
-    plt.plot(x, temp, label=f"SLP per Minute ({currency.upper()})")
+
+    fig, ax = plt.subplots()
+    ax.plot(x, temp, label=f"SLP per Minute ({currency.upper()})")
+    ax.xaxis.set_ticklabels([])
     plt.legend()
     plt.xlabel("Minute")
     plt.ylabel(f"SLP Price in {currency.upper()}")

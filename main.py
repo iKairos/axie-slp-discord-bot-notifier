@@ -6,7 +6,10 @@ from secrets import TOKEN
 bot = commands.Bot(command_prefix='slp ')
 bot.remove_command('help')
 
-extensions = ["cogs.slp"]
+extensions = [
+    "cogs.slp",
+    "cogs.axs"
+]
 
 @bot.event 
 async def on_ready():

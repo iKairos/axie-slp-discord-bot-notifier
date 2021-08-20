@@ -118,12 +118,12 @@ class SLP(commands.Cog):
             )
             embed.add_field(
                 name=f"Total SLP converted to {currency.upper()}",
-                value=f"{symbol}{total}",
+                value=f"{symbol}{total:.2f}",
                 inline=False
             )
             embed.add_field(
-                name=f"Total SLP converted to {currency.upper()} (%{percentage})",
-                value=f"{symbol}{total_part}",
+                name=f"({percentage}%) of the total SLP converted to {currency.upper()} ",
+                value=f"{symbol}{total_part:.2f}",
                 inline=False
             )
         embed.set_footer(

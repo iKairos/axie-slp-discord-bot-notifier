@@ -1,4 +1,4 @@
-import discord, random
+import discord
 from discord.ext import commands
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI

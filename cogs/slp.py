@@ -76,7 +76,7 @@ class SLP(commands.Cog):
         name="convert",
         description="Converts the number of slp to its final price based on the given currency.",
         usage="slp convert <currency> <total_slp>")
-    async def convert(self, ctx, currency, total_slp):
+    async def convert(self, ctx, currency, total_slp, percentage=None):
         await ctx.message.channel.trigger_typing()
 
         cg = CoinGeckoAPI()
@@ -84,7 +84,11 @@ class SLP(commands.Cog):
 
         symbol = cg.get_exchange_rates()['rates'][currency]['unit']
 
-        total = price * float(total_slp)
+        if percentage is None:
+            total = price * float(total_slp)
+        else:
+            total = price * float(total_slp)
+            total_part = price * float(total_slp) * (float(percentage)/100)
 
         embed = discord.Embed(
             description=f"The converted value of {total_slp} SLP to {currency.upper()}.",
@@ -95,14 +99,33 @@ class SLP(commands.Cog):
             name="Total SLP Converter",
             icon_url="https://cdn.discordapp.com/attachments/545533157131288587/876658614553686016/slp.png"
         )
-        embed.add_field(
-            name=f"Current SLP to {currency.upper()} rate",
-            value=f"{symbol}{price}"
-        )
-        embed.add_field(
-            name=f"Total SLP converted to {currency.upper()}",
-            value=f"{symbol}{total}"
-        )
+        if percentage is None:
+            embed.add_field(
+                name=f"Current SLP to {currency.upper()} rate",
+                value=f"{symbol}{price}",
+                inline=False
+            )
+            embed.add_field(
+                name=f"Total SLP converted to {currency.upper()}",
+                value=f"{symbol}{total}",
+                inline=False
+            )
+        else:
+            embed.add_field(
+                name=f"Current SLP to {currency.upper()} rate",
+                value=f"{symbol}{price}",
+                inline=False
+            )
+            embed.add_field(
+                name=f"Total SLP converted to {currency.upper()}",
+                value=f"{symbol}{total}",
+                inline=False
+            )
+            embed.add_field(
+                name=f"Total SLP converted to {currency.upper()} (%{percentage})",
+                value=f"{symbol}{total_part}",
+                inline=False
+            )
         embed.set_footer(
             text="As of"
         )

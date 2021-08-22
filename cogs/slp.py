@@ -54,7 +54,7 @@ class SLP(commands.Cog):
 
         graph_day_market_history(currency)
 
-        file = discord.File("assets/images/graphs/minutely.png", filename="mnt.png")
+        file = discord.File("assets/images/graphs/slp/minutely.png", filename="mnt.png")
 
         embed = discord.Embed(
             description="Graph of the minutely behavior of SLP today.",

@@ -3,22 +3,16 @@ SLP Bot is a Discord Bot that notifies you of the market behavior of the cryptoc
 
 ## Initial Preparation and Installation
 1. Clone the repository.
-2. Make sure you have the **Discord Py** python library. If you do not have this library just simply install it with the command below according to your OS.
-   - **Windows**:
-    `py -3 -m pip install -U discord.py`
-   - **Linux or MacOS**:
-    `python3 -m pip install -U discord.py`
-
-3. Run the `preparer.py` file to instantiate all the requirements and dependencies.
-4. Check if you have the following directories and file dependencies:
+2. Run the `preparer.py` file to instantiate all the requirements and dependencies.
+3. Check if you have the following directories and file dependencies:
    - `assets`
    - `assets/images`
    - `assets/images/graphs`
    - `assets/images/graphs/slp`
    - `assets/images/graphs/axs`
    - `secrets.py`
-5. Put your Discord Bot token under the variable `TOKEN` in the `secrets.py` file.
-6. Make sure you have the following dependencies/libraries:
+4. Put your Discord Bot token under the variable `TOKEN` in the `secrets.py` file.
+5. Make sure you have the following dependencies/libraries:
    - Discord Py
      - **Windows**: `py -3 -m pip install -U discord.py`
      - **Linux or MacOS**: `python3 -m pip install -U discord.py`

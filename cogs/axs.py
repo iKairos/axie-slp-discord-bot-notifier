@@ -3,6 +3,7 @@ from discord.ext import commands
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 from utils.axs_helpers import *
+from utils.embed_messages import easyembed
 
 class AXS(commands.Cog):
     def __init__(self, bot):
@@ -72,6 +73,72 @@ class AXS(commands.Cog):
         )
 
         await ctx.send(file=file, embed=embed)
+
+    @axsrate.error 
+    async def rate_error(self, ctx, error):
+        error = getattr(error, 'original', error)
+        if isinstance(error, KeyError):
+            e = easyembed("Error in AXS Rate Command", 
+                "error",
+                "The currency you have provided does not exist. Please try another currency.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        if isinstance(error, commands.MissingRequiredArgument):
+            e = easyembed("Error in AXS Rate Command", 
+                "error",
+                f"You are missing the `{error.param}` argument. Please provided all the required arguments for the command to work.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        e = easyembed("Error in AXS Rate Command", 
+            "error",
+            "An unhandled error has been detected. Please report this to the developers.", 
+            "Use the help command for more information."
+        )
+
+        await ctx.send(embed=e)
+
+    @axshistoryminutely.error 
+    async def historyminutely_error(self, ctx, error):
+        error = getattr(error, 'original', error)
+        if isinstance(error, ValueError):
+            e = easyembed("Error in AXS Historyminutely Command", 
+                "error",
+                "The currency you have provided does not exist. Please try another currency.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        if isinstance(error, commands.MissingRequiredArgument):
+            e = easyembed("Error in AXS Historyminutely Command", 
+                "error",
+                f"You are missing the `{error.param}` argument. Please provided all the required arguments for the command to work.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        e = easyembed("Error in AXS Historyminutely Command", 
+            "error",
+            "An unhandled error has been detected. Please report this to the developers.", 
+            "Use the help command for more information."
+        )
+
+        await ctx.send(embed=e)
 
 def setup(bot):
     bot.add_cog(AXS(bot))

@@ -26,4 +26,4 @@ SLP Bot is a Discord Bot that notifies you of the market behavior of the cryptoc
 ## Work to be Done
 - [ ] A Help Command (list and description of all commands)
 - [ ] Conversion into a scholar management system (?)
-- [ ] [Error Handling](https://github.com/iKairos/axie-slp-discord-bot-notifier/issues/3)
+- [x] [Error Handling](https://github.com/iKairos/axie-slp-discord-bot-notifier/issues/3)

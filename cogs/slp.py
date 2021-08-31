@@ -1,8 +1,10 @@
 import discord
+from discord import embeds
 from discord.ext import commands
 from datetime import datetime
 from pycoingecko import CoinGeckoAPI
 from utils.slp_helpers import *
+from utils.embed_messages import easyembed
 
 class SLP(commands.Cog):
     def __init__(self, bot):
@@ -131,6 +133,117 @@ class SLP(commands.Cog):
         )
 
         await ctx.send(embed=embed)
+    
+    @rate.error 
+    async def rate_error(self, ctx, error):
+        error = getattr(error, 'original', error)
+        if isinstance(error, KeyError):
+            e = easyembed("Error in Rate Command", 
+                "error",
+                "The currency you have provided does not exist. Please try another currency.", 
+                "Use the help command for more information."
+            )
 
+            await ctx.send(embed=e)
+
+            return 
+        
+        if isinstance(error, commands.MissingRequiredArgument):
+            e = easyembed("Error in Rate Command", 
+                "error",
+                f"You are missing the `{error.param}` argument. Please provided all the required arguments for the command to work.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        e = easyembed("Error in Rate Command", 
+            "error",
+            "An unhandled error has been detected. Please report this to the developers.", 
+            "Use the help command for more information."
+        )
+
+        await ctx.send(embed=e)
+
+    @historyminutely.error 
+    async def historyminutely_error(self, ctx, error):
+        error = getattr(error, 'original', error)
+        if isinstance(error, ValueError):
+            e = easyembed("Error in Historyminutely Command", 
+                "error",
+                "The currency you have provided does not exist. Please try another currency.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        if isinstance(error, commands.MissingRequiredArgument):
+            e = easyembed("Error in Historyminutely Command", 
+                "error",
+                f"You are missing the `{error.param}` argument. Please provided all the required arguments for the command to work.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        e = easyembed("Error in Historyminutely Command", 
+            "error",
+            "An unhandled error has been detected. Please report this to the developers.", 
+            "Use the help command for more information."
+        )
+
+        await ctx.send(embed=e)
+
+    @convert.error 
+    async def convert_error(self, ctx, error):
+        error = getattr(error, 'original', error)
+        if isinstance(error, KeyError):
+            e = easyembed("Error in Convert Command", 
+                "error",
+                "The currency you have provided does not exist. Please try another currency.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+
+        if isinstance(error, ValueError):
+            e = easyembed("Error in Convert Command", 
+                "error",
+                f"The argument you provided was not supported. Make sure you only provided integer values for the total slp and percentage parameters.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        if isinstance(error, commands.MissingRequiredArgument):
+            e = easyembed("Error in Convert Command", 
+                "error",
+                f"You are missing the `{error.param}` argument. Please provided all the required arguments for the command to work.", 
+                "Use the help command for more information."
+            )
+
+            await ctx.send(embed=e)
+
+            return 
+        
+        
+        e = easyembed("Error in Convert Command", 
+            "error",
+            f"An unhandled error has been detected. Please report this to the developers.", 
+            "Use the help command for more information."
+        )
+
+        await ctx.send(embed=e)
+        
 def setup(bot):
     bot.add_cog(SLP(bot))

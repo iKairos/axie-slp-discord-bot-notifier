@@ -8,7 +8,8 @@ bot.remove_command('help')
 
 extensions = [
     "cogs.slp",
-    "cogs.axs"
+    "cogs.axs",
+    "cogs.errors"
 ]
 
 @bot.event 
@@ -44,6 +45,7 @@ if __name__ == '__main__':
     for ext in extensions:
         try:
             bot.load_extension(ext)
+            print(f"Loaded extesion: {ext}")
         except Exception as e:
             print(ERR_LOAD.format(ext, e))
 

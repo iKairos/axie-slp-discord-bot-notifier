@@ -22,7 +22,9 @@ class SLP(commands.Cog):
         symbol = cg.get_exchange_rates()['rates'][currency]['unit']
 
         past = get_minutely_market_history(currency)
-        past = past[len(past)-2]
+        past1 = past[len(past)-2]
+
+        dXdY = (past[len(past)-1] - past[0])/(len(past) - 1)
 
         embed = discord.Embed(
             description=f"The current SLP rate for currency {currency.upper()}.",
@@ -35,11 +37,16 @@ class SLP(commands.Cog):
         )
         embed.add_field(
             name=f"Current SLP to {currency.upper()} rate",
-            value=f"{symbol}{price}"
+            value=f"{symbol}{price}",
         )
         embed.add_field(
             name=f"Direction",
-            value="⬆" if past < price else "⬇"
+            value="⬆" if past1 < price else "⬇",
+        )
+        embed.add_field(
+            name=f"Rate of Change",
+            value=f"{symbol}{dXdY:.5f} per second",
+            inline=False
         )
         embed.set_footer(
             text="Rate as of"

@@ -41,6 +41,45 @@ async def unload(ctx, extension):
     except Exception as e:
         await ctx.send(ERR_LOAD.format(extension, e))
 
+@bot.command()
+async def help(ctx):
+    author = ctx.message.author
+
+    embed = discord.Embed(
+        description="Displays all the command functions of the bot.",
+        color=0x1ABC9C,
+    )
+    embed.set_author(
+        name="SLP Bot Help",
+        icon_url="https://cdn.discordapp.com/attachments/545533157131288587/876658614553686016/slp.png"
+    )
+    embed.add_field(
+        name="Prefix",
+        value="`slp`",
+        inline=False
+    )
+    embed.add_field(
+        name="rate <currency>",
+        value="Displays the current SLP rate for input currency.",
+        inline=False
+    )
+    embed.add_field(
+        name="axsrate/axsr <currency>",
+        value="Displays the current AXS rate for input currency.",
+        inline=False
+    )
+    embed.add_field(
+        name="historyminutely/hm <currency>",
+        value="Displays the minutely graph of SLP based on input currency.",
+        inline=False
+    )
+    embed.add_field(
+        name="axshistoryminutely/axshm <currency>",
+        value="Displays the minutely graph of AXS based on input currency.",
+    )
+
+    await ctx.send(embed=embed)
+
 if __name__ == '__main__':
     for ext in extensions:
         try:
